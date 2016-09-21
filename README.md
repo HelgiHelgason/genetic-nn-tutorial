@@ -11,7 +11,7 @@ Genetic algorithms are worth understanding because, while being resource intensi
 
 Typical output (will vary, the process is highly dependant on random intial conditions):
 
-Best one in generation 0 has error [[ 12.59287846]]
+`Best one in generation 0 has error [[ 12.59287846]]
 Best one in generation 1 has error [[ 2.78300017]]
 Best one in generation 2 has error [[ 2.78300017]]
 Best one in generation 3 has error [[ 2.78300017]]
@@ -260,5 +260,5 @@ From X= -0.27 we wanted  0.963770896366  and got  [[ 0.96444773]]
 From X= 0.28 we wanted  0.961055438311  and got  [[ 0.96904265]]
 From X= 0.13 we wanted  0.991561893715  and got  [[ 1.00885092]]
 From X= 0.32 we wanted  0.949235418082  and got  [[ 0.95842711]]
-From X= 0.17 we wanted  0.98558476691  and got  [[ 0.99823538]]
+From X= 0.17 we wanted  0.98558476691  and got  [[ 0.99823538]]`
 
