@@ -1,8 +1,3 @@
-# This code uses a genetic algorithm to train a feed forward neural network to learn to approximate the cos(x) function. It is explicitly written to be easily understandable, at the cost of it's size.
-# It has no dependencies except Numpy (and could easily be modified to not even require that).
-# Note that this is written and published only with education purposes in mind, real-world training of neural networks is much more efficient with backpropagation.
-# Genetic algorithms are worth understanding because, while being resource intensive, they make no requirements for end-to-end differentiability, can easily handle discrete variables and are easy to code.
-
 import random
 import numpy as np
 import math
