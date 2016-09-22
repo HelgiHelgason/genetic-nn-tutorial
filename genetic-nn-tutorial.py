@@ -6,6 +6,7 @@
 import random
 import numpy as np
 import math
+import matplotlib.pyplot as plt
 
 # Our dataset
 dataset = []
@@ -100,17 +101,21 @@ def evaluate_neural_network(net, input_data, output_data):
 # Number of networks in each generation
 generation_size = 40
 # Size of the hidden layer
-hidden_layer_size = 30
+hidden_layer_size = 10
 # Maximum number of generations to cycle through
 generations_max = 100
 # Acceptable error threshold
-acceptable_error = 0.01
+acceptable_error = 0.025
 
 # Let's go ahead and create the first generation
 current_generation = []
 sorted_by_fitness = []
 for i in range(generation_size):
     current_generation.append(produce_neural_network(1, hidden_layer_size, 1))
+
+print 'Starting evolution'
+
+best_score_per_generation = []
 
 # Our main loop that does the evolution
 for j in range(generations_max):
@@ -121,13 +126,15 @@ for j in range(generations_max):
     sorted_by_fitness = sorted(current_generation, key=lambda k: k['sse'])
 
     # Print the best one
-    print 'Best one in generation', j, 'has error', sorted_by_fitness[0]['sse']
+    print 'Best solution in generation', j, 'has error', sorted_by_fitness[0]['sse'].item(0)
+    best_score_per_generation.append(sorted_by_fitness[0]['sse'].item(0))
 
+    # Stop if we're close enough already
     if sorted_by_fitness[0]['sse'] < acceptable_error:
         print 'Done!'
         break
 
-    # Create a new generation and make sure we hang onto the best network so far
+    # Create a new generation and make sure we hang onto the best solution so far
     new_generation = []
     new_generation.append(sorted_by_fitness[0])
     # Do breeding to create the next generation
@@ -141,10 +148,18 @@ for j in range(generations_max):
         child = breed_neural_networks(sorted_by_fitness[mother_index], sorted_by_fitness[father_index])
         new_generation.append(child)
     current_generation = new_generation
+print 'Evolution done'
 
+print 'Starting test phase'
 # Let's test what we learned on the testing data
 for i in range(len(x_testing)):
     input_value = x_testing[i]
     desired_output_value = y_testing[i]
     actual_output = run_neural_network([input_value], sorted_by_fitness[0])
-    print 'From X=',input_value,'we wanted ',desired_output_value,' and got ',actual_output[0]
+    print 'From X=',input_value,'we wanted',desired_output_value,'and got',actual_output[0].item(0)
+
+# Plot the error over all generations
+plt.plot(best_score_per_generation)
+plt.ylabel('Error')
+plt.xlabel('Generation')
+plt.show()
